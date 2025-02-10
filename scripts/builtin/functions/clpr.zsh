@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-function clclpr () {
+function clpr () {
 	if [ $# -lt 1 ]; then
 		echo "$0 needs at least 1 argument."
 		return 0
