@@ -121,7 +121,7 @@ fi
 
 # Since this will work only on the next startup, for now, let's initialize the functions right now
 echo "Trying to enable the scripts right now."
-if [[ -v ZSHY_INSTALLED ]]; then 
+if [[ -v ZSHY_INSTALLED && $ZSHY_INSTALLED == "yes" ]]; then 
   source $HOME/.zshrc
 else
   echo "source $ZSHY_HOME/init.zsh" >> $HOME/.zshrc
