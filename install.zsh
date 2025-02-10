@@ -8,31 +8,15 @@ if ! type "git" > /dev/null; then
   return 1
 fi
 
-# Set the installation folder to ~/.zshy
-if [[ -v ZSHY_HOME && ! -d ZSHY_HOME ]]; then
+if [[ -v ZSHY_HOME && -d ZSHY_HOME ]]; then
   # ZSHY is installed already
   echo "It looks like ZSHY scripts are already installed."
   echo "You might want to upgrade it, maybe (currently upgrading automatically is not supported)"
-  echo "However we can try to pull from git."
-  read -k 1 "choice?Should we try? [y/n] "
-  echo "" 
-  if [[ $choice == "Y" || $choice == "y" ]]; then 
-    echo "trying to pull from remote..."
-    git pull
-    if [ $? -ne 0 ]; then
-      echo "Bummer. Looks like something did not go well."
-      return 1
-    else
-      echo "Update succeeded it seemns. You can run 'resh' to reload the framework."
-      echo "Or you can try to run 'source ~/.zshrc'"
-      return 0
-    fi
-  else
-    echo "you chose not to pull from remote"
-  fi
+  echo "You might want to go to $ZSHY_HOME and run 'git pull' to get latest updates"
   return 1
 fi
 
+# Set the installation folder to ~/.zshy
 ZSHY_HOME=$HOME/.zshy
 
 # We will store the current path in a variable so that we return to it after installation is done.
@@ -137,8 +121,12 @@ fi
 
 # Since this will work only on the next startup, for now, let's initialize the functions right now
 echo "Trying to enable the scripts right now."
-echo "source $ZSHY_HOME/init.zsh" >> $HOME/.zshrc
-source $ZSHY_HOME/init.zsh
+if [[ -v ZSHY_INSTALLED ]]; then 
+  source $HOME/.zshrc
+else
+  echo "source $ZSHY_HOME/init.zsh" >> $HOME/.zshrc
+  source $ZSHY_HOME/init.zsh
+fi
 
 echo "For complete effect, please close this shell and start a new one"
 
