@@ -137,12 +137,8 @@ fi
 
 # Since this will work only on the next startup, for now, let's initialize the functions right now
 echo "Trying to enable the scripts right now."
-if [[ -v ZSHY_HOME ]]; then 
-  source $HOME/.zshrc
-else
-  echo "source $ZSHY_HOME/init.zsh" >> $HOME/.zshrc
-  source $ZSHY_HOME/init.zsh
-fi
+echo "source $ZSHY_HOME/init.zsh" >> $HOME/.zshrc
+source $ZSHY_HOME/init.zsh
 
 echo "For complete effect, please close this shell and start a new one"
 
