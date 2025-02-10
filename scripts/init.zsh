@@ -27,8 +27,5 @@ if [[ -f "$HOME/bin/zshy/init.zsh" ]]; then
   source "$HOME/bin/zshy/init.zsh"
 fi
 
-# Initialize the installed utilities
-source ${0:a:h}/installed/init.zsh
-
 # Run Post-init script
 source ${0:a:h}/post_init.zsh
