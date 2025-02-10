@@ -47,7 +47,7 @@ echo ""
   
 home_bin_zshy_dir="$HOME/bin/zshy"             # home_bin_zshy_dir = zshy directory inside the bin directory of user's HOME
 zshy_ext_dir="$home_bin_zshy_dir/extensions"   # zshy_ext_dir = bin extensions folder
-zshy_ext_data_dir="$home_bin_zshy_dir/extensions-data"   # zshy_ext_dir = bin extensions data folder
+zshy_ext_data_dir="$home_bin_zshy_dir/extensions_data"   # zshy_ext_dir = bin extensions data folder
 bininit="$home_bin_zshy_dir/init.zsh"
 
 if [[ $choice == "Y" || $choice == "y" ]]; then
