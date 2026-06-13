@@ -44,7 +44,7 @@ echo "This step will also create the extensions folder to install zshy extension
 echo ""
 read -k 1 "choice?Do you want to continue? [y/n] "
 echo ""
-  
+
 home_bin_zshy_dir="$HOME/bin/zshy"             # home_bin_zshy_dir = zshy directory inside the bin directory of user's HOME
 zshy_ext_dir="$home_bin_zshy_dir/extensions"   # zshy_ext_dir = bin extensions folder
 zshy_ext_data_dir="$home_bin_zshy_dir/extensions_data"   # zshy_ext_dir = bin extensions data folder
@@ -67,7 +67,7 @@ if [[ $choice == "Y" || $choice == "y" ]]; then
       # We need to create the init file
       create_bininit="yes"
     fi
-    
+
     echo -n "Checking for the extensions directory... "
     if [[ -d "$zshy_ext_dir" ]]; then
       echo "already exists"
@@ -92,14 +92,16 @@ if [[ $choice == "Y" || $choice == "y" ]]; then
 
   if [[ $create_bininit == "yes" ]]; then
     echo "Creating the file: $bininit"
-  
+
     echo "#!/usr/bin/env zsh\n\n" > "$bininit"
-  
+
     if [ $? -ne 0 ]; then
       echo "Creating the $bininit file failed!"
     else
       echo "# Place your shell initialization instructions such as updates to your \$PATH, aliases," >> "$bininit"
-      echo "# custom functions etc. in this file. This file is source'd on each shell initialization\n\n" >> "$bininit"
+      echo "# custom functions etc. in this file. This file is source'd on each shell initialization.\n\n" >> "$bininit"
+      echo "# If you have installed sess (https://github.com/techrail/sess), please enable the line below:\n" >> "$bininit"
+      echo "# [[ -v ZSH_SESSION_INIT_FILE ]] && source \"\$ZSH_SESSION_INIT_FILE\" \n" >> "$bininit"
       echo "...success"
     fi
   fi
@@ -108,20 +110,20 @@ if [[ $choice == "Y" || $choice == "y" ]]; then
     mkdir -p $zshy_ext_dir
     if [ $? -ne 0 ]; then
       echo "E#29W1BO: Creating the extensions directory failed!"
-    fi 
-    
+    fi
+
     mkdir -p $zshy_ext_data_dir
     if [ $? -ne 0 ]; then
       echo "E#29W1C0: Creating the extensions data directory failed!"
-    fi 
+    fi
   fi
 else
   echo "You opted to not create the $bininit file."
-fi  
+fi
 
 # Since this will work only on the next startup, for now, let's initialize the functions right now
 echo "Trying to enable the scripts right now."
-if [[ -v ZSHY_INSTALLED && $ZSHY_INSTALLED == "yes" ]]; then 
+if [[ -v ZSHY_INSTALLED && $ZSHY_INSTALLED == "yes" ]]; then
   source $HOME/.zshrc
 else
   echo "source $ZSHY_HOME/init.zsh" >> $HOME/.zshrc
@@ -129,5 +131,3 @@ else
 fi
 
 echo "For complete effect, please close this shell and start a new one"
-
-
